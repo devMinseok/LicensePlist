@@ -24,7 +24,7 @@ struct SwiftPackageFileReader: FileReader {
     let path: URL
 
     func read() throws -> String? {
-        if path.lastPathComponent != Consts.packageName && path.lastPathComponent != "Package.resolved" {
+        guard Consts.packageFileNames.contains(path.lastPathComponent) else {
             throw FileReaderError(path: path)
         }
 
